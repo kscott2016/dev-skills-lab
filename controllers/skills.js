@@ -23,14 +23,22 @@ function index(req,res){
 //   })
 // }
 
-function newTodo (req,res){
-  res.render('todos/new')
+function newSkill (req,res){
+  res.render('skills/new')
 }
 
+
 function create(req,res){
-  req.body.done=false
-  Todo.create(req.body).then(todo=>{
-    res.redirect('/todos')
+  //req.body is the data from theform and inputs are stored as key,value pairs 
+  
+  // console.log("Before done property is set:")
+  // console.log(req.body)
+  // console.log("After done property is set:")
+ // console.log(req.body)
+  //create a new record inside skill collection, content is req.body
+  Skill.create(req.body).then(skill=>{
+    res.redirect('/skills')
+    
 
   })
 }
@@ -46,7 +54,7 @@ function show(req,res){
 
 export {
   index,
-  newTodo as new, 
+  newSkill as new, 
   create, 
   show
 }

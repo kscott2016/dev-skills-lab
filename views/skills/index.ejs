@@ -9,5 +9,13 @@
 </head>
 <body>
   <h1>Skills List</h1>
+  <ul>
+    <% skills.forEach(skill => { %>
+      <li>
+				<a href="/skill/<%= skill.name%>"><%= skill.name %></a>
+			</li>
+    <% }) %>
+    <a href="/skills/new">Add Skill</a>
+  </ul>
 </body>
 </html>
