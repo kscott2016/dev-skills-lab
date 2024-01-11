@@ -30,7 +30,7 @@ function newSkill (req,res){
 
 function create(req,res){
   //req.body is the data from theform and inputs are stored as key,value pairs 
-  
+
   // console.log("Before done property is set:")
   // console.log(req.body)
   // console.log("After done property is set:")
@@ -45,16 +45,24 @@ function create(req,res){
 
 function show(req,res){
 
-  Todo.findById(req.params.todoId).then(todo=>{
-    res.render('todos/show',{
-      todo:todo
+  Skill.findById(req.params.skillId).then(skill=>{
+    res.render('skills/show',{
+      skill:skill
     })
+  })
+}
+
+function deleteSkill(req,res){
+  
+  Skill.delete(req.body).then(skill=>{
+    res.redirect('/skills')
   })
 }
 
 export {
   index,
-  newSkill as new, 
+  newSkill as new,
+  deleteSkill as delete, 
   create, 
   show
 }
