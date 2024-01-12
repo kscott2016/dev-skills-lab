@@ -23,13 +23,14 @@ function index(req,res){
 //   })
 // }
 
+//renders form to collect data to add to database
 function newSkill (req,res){
   res.render('skills/new')
 }
 
 
 function create(req,res){
-  //req.body is the data from theform and inputs are stored as key,value pairs 
+  //req.body is the data from the form and inputs are stored as key,value pairs 
 
   // console.log("Before done property is set:")
   // console.log(req.body)
@@ -43,19 +44,21 @@ function create(req,res){
   })
 }
 
+function deleteSkill(req,res){
+  
+  Skill.findByIdAndDelete(req.params.skillId).then(skill =>{
+
+      res.redirect("/skills")
+      
+  })
+}
+
 function show(req,res){
 
   Skill.findById(req.params.skillId).then(skill=>{
     res.render('skills/show',{
-      skill:skill
+      skill: skill
     })
-  })
-}
-
-function deleteSkill(req,res){
-  
-  Skill.delete(req.body).then(skill=>{
-    res.redirect('/skills')
   })
 }
 
