@@ -62,7 +62,7 @@ function update (req,res){
   req.body.done = !!req.body.done
   Skill.findByIdAndUpdate(req.params.skillId,req.body,{new:true}).then(skill=>{
     console.log('NEW NAME:'+ req.params.name)
-    res.redirect(`/skills/${skill._id}`)
+    res.redirect(`/skills`)
   })
 }
 
