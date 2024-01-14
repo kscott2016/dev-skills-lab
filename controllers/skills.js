@@ -37,10 +37,32 @@ function create(req,res){
   // console.log("After done property is set:")
  // console.log(req.body)
   //create a new record inside skill collection, content is req.body
-  Skill.create(req.body).then(skill=>{
-    res.redirect('/skills')
-    
+    req.body.done=false
+    Skill.create(req.body).then(skill=>{
 
+      res.redirect('/skills')
+    })
+  
+}
+
+function edit(req,res){
+
+  Skill.findById(req.params.skillId).then(skill=>{
+    res.render('skills/edit',{
+      skill:skill
+    })
+  }).catch(err=>{
+    console.log(err)
+    res.redirect('/')
+  })
+}
+
+function update (req,res){
+  console.log('OLD NAME:'+ req.params.name)
+  req.body.done = !!req.body.done
+  Skill.findByIdAndUpdate(req.params.skillId,req.body,{new:true}).then(skill=>{
+    console.log('NEW NAME:'+ req.params.name)
+    res.redirect(`/skills/${skill._id}`)
   })
 }
 
@@ -67,5 +89,7 @@ export {
   newSkill as new,
   deleteSkill as delete, 
   create, 
+  edit,
+  update,
   show
 }
